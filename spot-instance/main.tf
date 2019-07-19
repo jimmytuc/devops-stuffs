@@ -9,8 +9,8 @@ resource "aws_spot_fleet_request" "spot_fleet_request" {
   excess_capacity_termination_policy = "${var.excess_capacity_termination_policy}"
 
   launch_specification {
+    ami = "${var.ami_id}"
     instance_type = "${var.instance_type}"
-    ami = "${data.aws_ami.linux.id}"
     iam_instance_profile = "${var.iam_instance_profile}"
     associate_public_ip_address = "${var.associate_public_ip_address}"
     vpc_security_group_ids = ["${var.aws_security_groups["backend-pro"]}"]
@@ -20,10 +20,7 @@ resource "aws_spot_fleet_request" "spot_fleet_request" {
     monitoring = "${var.monitoring}"
     ebs_optimized = "${var.ebs_optimized}"
     user_data = "${var.user_data}"
-
     availability_zone = "${var.availability_zone}"
-
-
     root_block_device {
       volume_size = "${var.root_ebs["volume_size"]}"
       volume_type = "${var.root_ebs["volume_type"]}"

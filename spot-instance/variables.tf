@@ -5,7 +5,7 @@ variable "aws_region" {
 
 variable "availability_zone" {
   description = "The AZ to start the instance in"
-  default     = "ap-southeast-1a"
+  default = "ap-southeast-1a"
 }
 
 variable "aws_subnets" {
@@ -101,15 +101,12 @@ variable "user_data" {
   default     = ""
 }
 
+# required vars
+variable "instance_type" {}
 variable "image_tag" {}
-
 variable "instance_name" {}
-
 variable "app_name" {}
-
-variable "instance_type" {
-  default = "t2.micro"
-}
-
 variable "env" {}
 variable "newrelic_license" {}
+
+variable "ami_id" {}
