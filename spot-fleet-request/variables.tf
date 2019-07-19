@@ -1,3 +1,4 @@
+# Default vars
 variable "aws_region" {
   description = "EC2 Region for the VPC"
   default = "ap-southeast-1"
@@ -8,33 +9,6 @@ variable "availability_zone" {
   default = "ap-southeast-1a"
 }
 
-variable "aws_subnets" {
-  type = "map"
-  default = {
-    "iprice-qa-a" = "subnet-"
-    "iprice-prod-backend-a" = "subnet-"
-  }
-}
-
-variable "aws_security_groups" {
-  type = "map"
-  default = {
-    "backend-pro" = "sg-"
-  }
-}
-
-variable "iam_instance_profile" {
-  default = "iam-role"
-}
-
-variable "key_names" {
-  type = "map"
-  default = {
-    "qa" = "identity.pem.pub"
-    "production" = "identity.pem.pub"
-  }
-}
-
 variable "associate_public_ip_address" {
   default = true
 }
@@ -43,12 +17,6 @@ variable "spot_price" {
   default = "0.01"
   type    = "string"
   description = "The maximum hourly price (bid) you are willing to pay for the instance, e.g. 0.10"
-}
-
-variable "iam_fleet_role" {
-  type = "string"
-  default = "arn:aws:iam:role/aws-service-role/spotfleet.amazonaws.com/AWSServiceRoleForEC2SpotFleet"
-  description = "Grants the Spot fleet permission to terminate Spot instances"
 }
 
 variable "target_capacity" {
@@ -101,12 +69,39 @@ variable "user_data" {
   default     = ""
 }
 
+# need to overwrite
+variable "aws_subnets" {
+  type = "map"
+  default = {
+    "iprice-qa-a" = "subnet-"
+    "iprice-prod-backend-a" = "subnet-"
+  }
+}
+
+variable "aws_security_groups" {
+  type = "map"
+  default = {
+    "backend-pro" = "sg-"
+  }
+}
+
+variable "key_names" {
+  type = "map"
+  default = {
+    "qa" = "identity.pem.pub"
+    "production" = "identity.pem.pub"
+  }
+}
+
 # required vars
+variable "iam_fleet_role" {
+  description = "Grants the Spot fleet permission to terminate Spot instances"
+}
+variable "iam_instance_profile" {}
+variable "ami_id" {}
 variable "instance_type" {}
 variable "image_tag" {}
 variable "instance_name" {}
 variable "app_name" {}
 variable "env" {}
 variable "newrelic_license" {}
-
-variable "ami_id" {}
